@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IYTPSmSK1yU=",
+  "dgSpecHash": "s6zrwnhbObs=",
   "success": true,
-  "projectFilePath": "/home/sadboy/RiderProjects/TushinoStatistics/Backend.Statistics/Backend.Statistics.csproj",
+  "projectFilePath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Backend.Statistics/Backend.Statistics.csproj",
   "expectedPackageFiles": [
     "/home/sadboy/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/home/sadboy/.nuget/packages/efcore.namingconventions/8.0.2/efcore.namingconventions.8.0.2.nupkg.sha512",

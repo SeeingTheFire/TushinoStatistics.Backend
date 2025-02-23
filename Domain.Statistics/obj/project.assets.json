@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/sadboy/RiderProjects/TushinoStatistics/Domain.Statistics/Domain.Statistics.csproj",
+      "projectUniqueName": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Domain.Statistics/Domain.Statistics.csproj",
       "projectName": "Domain.Statistics",
-      "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics/Domain.Statistics/Domain.Statistics.csproj",
+      "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Domain.Statistics/Domain.Statistics.csproj",
       "packagesPath": "/home/sadboy/.nuget/packages/",
-      "outputPath": "/home/sadboy/RiderProjects/TushinoStatistics/Domain.Statistics/obj/",
+      "outputPath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Domain.Statistics/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/sadboy/.nuget/NuGet/NuGet.Config"

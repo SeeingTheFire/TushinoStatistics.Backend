@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZZgeWfqLC10=",
+  "dgSpecHash": "Tx8r45dgsoY=",
   "success": true,
-  "projectFilePath": "/home/sadboy/RiderProjects/TushinoStatistics/Domain.Statistics/Domain.Statistics.csproj",
+  "projectFilePath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Domain.Statistics/Domain.Statistics.csproj",
   "expectedPackageFiles": [
     "/home/sadboy/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
     "/home/sadboy/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512"

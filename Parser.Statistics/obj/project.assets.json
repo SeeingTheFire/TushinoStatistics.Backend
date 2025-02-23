@@ -3894,11 +3894,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/sadboy/RiderProjects/TushinoStatistics/Parser.Statistics/Parser.Statistics.csproj",
+      "projectUniqueName": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Parser.Statistics/Parser.Statistics.csproj",
       "projectName": "Parser.Statistics",
-      "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics/Parser.Statistics/Parser.Statistics.csproj",
+      "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Parser.Statistics/Parser.Statistics.csproj",
       "packagesPath": "/home/sadboy/.nuget/packages/",
-      "outputPath": "/home/sadboy/RiderProjects/TushinoStatistics/Parser.Statistics/obj/",
+      "outputPath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Parser.Statistics/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/sadboy/.nuget/NuGet/NuGet.Config"
@@ -3913,14 +3913,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/sadboy/RiderProjects/TushinoStatistics/Components.Statistics/Components.Statistics.csproj": {
-              "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics/Components.Statistics/Components.Statistics.csproj"
+            "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Components.Statistics/Components.Statistics.csproj": {
+              "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Components.Statistics/Components.Statistics.csproj"
             },
-            "/home/sadboy/RiderProjects/TushinoStatistics/DataBase.Statistics/DataBase.Statistics.csproj": {
-              "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics/DataBase.Statistics/DataBase.Statistics.csproj"
+            "/home/sadboy/RiderProjects/TushinoStatistics.Backend/DataBase.Statistics/DataBase.Statistics.csproj": {
+              "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/DataBase.Statistics/DataBase.Statistics.csproj"
             },
-            "/home/sadboy/RiderProjects/TushinoStatistics/Domain.Statistics/Domain.Statistics.csproj": {
-              "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics/Domain.Statistics/Domain.Statistics.csproj"
+            "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Domain.Statistics/Domain.Statistics.csproj": {
+              "projectPath": "/home/sadboy/RiderProjects/TushinoStatistics.Backend/Domain.Statistics/Domain.Statistics.csproj"
             }
           }
         }
