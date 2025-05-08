@@ -62,5 +62,11 @@ namespace Parser.Statistics.Resource {
                 return ResourceManager.GetString("NewUsers", resourceCulture);
             }
         }
+        
+        internal static string Cant_connect_to_replay_server {
+            get {
+                return ResourceManager.GetString("Cant_connect_to_replay_server", resourceCulture);
+            }
+        }
     }
 }

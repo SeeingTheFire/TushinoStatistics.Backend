@@ -11,4 +11,11 @@
       <ProjectReference Include="..\Domain.Statistics\Domain.Statistics.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Services\Interfases\IMedicalService.cs" />
+      <Compile Remove="Services\Interfases\IPlayerService.cs" />
+      <Compile Remove="Services\Interfases\IReplayService.cs" />
+      <Compile Remove="Services\Interfases\ISquadService.cs" />
+    </ItemGroup>
+
 </Project>

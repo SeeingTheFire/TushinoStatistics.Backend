@@ -1,4 +1,4 @@
-﻿using Components.Statistics.Services.Interfases;
+﻿using Components.Statistics.Services.Interfaces;
 using DataBase.Statistics;
 using DataBase.Statistics.Models;
 using Domain.Statistics.Entities;
@@ -35,7 +35,7 @@ public class ReplayProcessingService(ILogger<ReplayProcessingService> logger, IR
         
         //TODO: Временный лок количества реплеев
         var splittedReplays = newReplays//.Where(x=>x.GameId == "T3.2024-01-06-23-27-20.TSG@216_fra_PF_Day_Eight_v7.fallujahint")
-            .Take(30)
+            .Take(1)
             .ToList();
         
         
@@ -57,13 +57,11 @@ public class ReplayProcessingService(ILogger<ReplayProcessingService> logger, IR
         }
     }
 
-    private async Task<bool> UpdateStatistics(ReplayInfo replay)
+    private async Task UpdateStatistics(ReplayInfo replay)
     {
         var unitOfWork = unitOfWorkFactory.Create();
         replayService.AddNewReplay(replay.Game);
         await squadService.UpdateSquads(replay.Squads.Values.ToList());
-
-        
         
         var kills = replay.Kills.ToList();
         var killsDictionary = new Dictionary<long, Kill>();
@@ -81,12 +79,13 @@ public class ReplayProcessingService(ILogger<ReplayProcessingService> logger, IR
         
         var murderDamage = replay.DamageInfos
             .GroupBy(x=>x.MurdererSteamId, x=>x)
+            .Where(x => x.Key is not null)
             .ToDictionary(x=>x.Key, x=>x.ToList());
 
         var attendances = replay.Players
             .Select(player => new Attendance(replay.Game, player.Value.SteamId, 
                 killsDictionary.TryGetValue(player.Value.SteamId, out _),
-                murderDamage.TryGetValue(player.Value.SteamId, out var damages) ? [] : []))
+                murderDamage.TryGetValue(player.Value.SteamId, out var damages) ? damages : []))
             .ToList();
         
 
@@ -100,7 +99,7 @@ public class ReplayProcessingService(ILogger<ReplayProcessingService> logger, IR
         versionService.UpdateVersion();
         await unitOfWork.SaveChangesAsync();
 
-        return unitOfWork.Complete();
+        unitOfWork.Complete();
     }
     
     /// <summary>
@@ -121,6 +120,6 @@ public class ReplayProcessingService(ILogger<ReplayProcessingService> logger, IR
             return null;
 
         // Парсим информацию из json
-        return await parser.GetInformationFromJson(replay.repl, gameTdo, cancellationToken);
+        return await parser.GetInformationFromJson(replay, gameTdo, cancellationToken);
     }
 }

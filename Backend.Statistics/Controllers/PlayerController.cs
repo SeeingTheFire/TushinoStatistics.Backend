@@ -1,5 +1,4 @@
-using Components.Statistics.Services.Interfases;
-using Microsoft.AspNetCore.Authorization;
+using Components.Statistics.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Statistics.Controllers;
@@ -30,7 +29,7 @@ public class PlayerController : ControllerBase
     /// </summary>
     /// <param name="name">Имя игрока</param>
     /// <returns></returns>
-    [HttpGet]
+    [HttpGet("player/{name}")]
     public async Task<IActionResult> GetPlayer(string name)
     {
         if (!DateTime.TryParse(_configuration["LimitedDateTime"], out var limitedDateTime) 

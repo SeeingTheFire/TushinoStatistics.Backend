@@ -1,12 +1,14 @@
-using Components.Statistics.Services.Interfases;
+using Components.Statistics.Services.Interfaces;
 using DataBase.Statistics.Models.DataTransferObjects;
 using DataBase.Statistics.Repositories.Interfaces;
 using Domain.Statistics.Entities;
 
 namespace Components.Statistics.Services.DomainServices;
 
+/// <inheritdoc />
 public class PlayerService(IPlayerRepository playerRepository) : IPlayerService
 {
+    /// <inheritdoc />
     public async Task UpdatePlayers(List<Player> replayPlayers, Game gameGame)
     {
         var tags = replayPlayers.Select(s => s.SteamId);
@@ -30,7 +32,8 @@ public class PlayerService(IPlayerRepository playerRepository) : IPlayerService
         }
     }
 
-    public async Task<List<PlayerDto>> GetList()
+    /// <inheritdoc />
+    public async Task<List<PlayerDto>> GetList(DateOnly? dateOnly = null)
     {
         return await playerRepository.GetAllList();
     }

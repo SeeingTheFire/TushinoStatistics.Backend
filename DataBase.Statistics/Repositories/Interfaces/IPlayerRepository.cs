@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using DataBase.Statistics.Models.DataTransferObjects;
 using Domain.Statistics.Entities;
 
@@ -5,7 +6,12 @@ namespace DataBase.Statistics.Repositories.Interfaces;
 
 public interface IPlayerRepository
 {
-    public Task<List<PlayerDto>> GetAllList();
+    /// <summary>
+    /// Получение листа пользователей
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    public Task<List<PlayerDto>> GetAllList(Expression<Func<Player, bool>>? filter = null);
     
     /// <summary>
     /// Возвращает информацию об игроке по идентификатору Steam

@@ -27,4 +27,7 @@
     <data name="NewUsers" xml:space="preserve">
         <value>New users count: {0}</value>
     </data>
+    <data name="Cant_connect_to_replay_server" xml:space="preserve">
+        <value>Связь с сервером недоступна</value>
+    </data>
 </root>

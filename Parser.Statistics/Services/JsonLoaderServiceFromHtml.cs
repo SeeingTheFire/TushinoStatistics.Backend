@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using DataBase.Statistics.Models;
 using Domain.Statistics.Entities;
 using Parser.Statistics.Resource;
@@ -10,6 +9,11 @@ namespace Parser.Statistics.Services;
 public class JsonLoaderServiceFromHtml(IHttpClientFactory client) : IJsonLoaderService
 {
     private readonly HttpClient _client = client.CreateClient("Parser");
+
+    private static readonly JsonSerializerOptions Options = new()
+    {
+        PropertyNameCaseInsensitive = true
+    }; 
 
     // Ссылки на реплеи
     private const string UrlSg = "https://game.tsgames.ru/ajax.php?a=l&params%5Bf%5D%5B%5D=2&params%5Bf%5D%5B%5D=3&params%5Bf%5D%5B%5D=4&params%5Bf%5D%5B%5D=10&params%5Bf%5D%5B%5D=20%3A1";
@@ -31,7 +35,7 @@ public class JsonLoaderServiceFromHtml(IHttpClientFactory client) : IJsonLoaderS
         catch (HttpRequestException e)
         {
             Console.WriteLine(e.Message);
-            Console.WriteLine("Связь с сервером недоступна");
+            Console.WriteLine(Resources.Cant_connect_to_replay_server);
             return null;
         }
     }
@@ -51,15 +55,10 @@ public class JsonLoaderServiceFromHtml(IHttpClientFactory client) : IJsonLoaderS
             return [];
         }
 
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
-
         // Десереализуем его в строки
         try
         {
-            var replayCollectionFromJson = await JsonSerializer.DeserializeAsync<JsonReplayRowDto>(gamesListJson, options);
+            var replayCollectionFromJson = await JsonSerializer.DeserializeAsync<JsonReplayRowDto>(gamesListJson, Options);
             // Сверяем те реплеии которых нет в бд
             return replayCollectionFromJson == null
                 ? []
@@ -70,8 +69,6 @@ public class JsonLoaderServiceFromHtml(IHttpClientFactory client) : IJsonLoaderS
             Console.WriteLine(e);
             return [];
         }
-
-        return [];
     }
 
     /// <summary>
@@ -108,35 +105,18 @@ public class JsonLoaderServiceFromHtml(IHttpClientFactory client) : IJsonLoaderS
     /// </summary>
     /// <param name="name">Имя реплея</param>
     /// <returns></returns>
-    public async Task<ReplayInformation?> GetReplayInformation(string name)
+    public async Task<List<List<object>>?> GetReplayInformation(string name)
     {
         var uri = $"https://game.tsgames.ru/ajax.php?a=gl&params%5Bf%5D={name}&params%5Bar%5D=1&params%5Ba%5D=3";
         var response = await _client.GetAsync(uri);
         response.EnsureSuccessStatusCode();
         Console.WriteLine(Resources.ResultUri, uri);
+        
+        var responseString = await response.Content.ReadAsStringAsync();
+        var inf = JsonSerializer.Deserialize<ReplayInf>(responseString, Options);
 
-        // Чиним в Json
-        var sb = FixingJson(await response.Content.ReadAsStringAsync());
-
-        // Получение объекта ReplayInformation
-        var replayInArray = JsonSerializer.Deserialize<ReplayInformation>(sb.ToString());
-
-        return replayInArray;
-    }
-
-    /// <summary>
-    /// Исправление Json
-    /// </summary>
-    /// <param name="replay">Сломанный Json реплей</param>
-    private static StringBuilder FixingJson(string replay)
-    {
-        replay = replay.Replace("\\r", "\n").Replace("\\", "");
-        replay = replay.Remove(0, 9);
-        replay = replay.Remove(replay.Length - 13);
-        var sb = new StringBuilder();
-        sb.Append("{ \"repl\":\n");
-        sb.Append(replay);
-        sb.Append('}');
-        return sb;
+        return inf is null ? null :
+            // Получение объекта ReplayInformation
+            JsonSerializer.Deserialize<List<List<object>>>(inf.Json);
     }
 }

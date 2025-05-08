@@ -1,5 +1,4 @@
-﻿using Parser.Statistics.Services;
-using Parser.Statistics.Services.Interfaces;
+﻿using Parser.Statistics.Services.Interfaces;
 
 namespace Parser.Statistics;
 

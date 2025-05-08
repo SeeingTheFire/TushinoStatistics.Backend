@@ -17,5 +17,5 @@ public interface IJsonLoaderService
     /// </summary>
     /// <param name="uri">Ссылка</param>
     /// <returns></returns>
-    public Task<ReplayInformation?> GetReplayInformation(string uri);
+    public Task<List<List<object>>?> GetReplayInformation(string uri);
 }

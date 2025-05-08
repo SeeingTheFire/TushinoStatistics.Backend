@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using DataBase.Statistics.Models.DataTransferObjects;
 using DataBase.Statistics.Repositories.Interfaces;
 using Domain.Statistics.Entities;
@@ -7,20 +8,22 @@ namespace DataBase.Statistics.Repositories;
 
 public class PlayerRepository(ApplicationContext context) : IPlayerRepository
 {
-    public async Task<List<PlayerDto>> GetAllList()
+    public async Task<List<PlayerDto>> GetAllList(Expression<Func<Player, bool>>? filter = null)
     {
-        var list = await context.Players
+        var query =  context.Players
             .AsNoTracking()
             .Include(x => x.Kills)
             .Include(x => x.Deaths)
             .Include(x => x.Attendances)
             .Include(x => x.TreatmentFromPlayer)
-            .AsSplitQuery()
-            .AsNoTracking()
+            .AsSplitQuery();
+
+        if (filter != null)
+            query = query.Where(filter);
+        
+        return await query.AsNoTracking()
             .Select(x => new PlayerDto(x))
             .ToListAsync();
-
-        return list;
     }
 
     /// <inheritdoc />
@@ -36,12 +39,7 @@ public class PlayerRepository(ApplicationContext context) : IPlayerRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.SteamId == steamId);
         
-        if (player is null)
-        {
-            return null;
-        }
-        
-        return new PlayerDto(player);
+        return player is null ? null : new PlayerDto(player);
     }
 
     /// <inheritdoc />
@@ -57,12 +55,7 @@ public class PlayerRepository(ApplicationContext context) : IPlayerRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Name == name);
         
-        if (player is null)
-        {
-            return null;
-        }
-
-        return new PlayerDto(player);
+        return player is null ? null : new PlayerDto(player);
     }
 
     public Task<List<Player>> GetByIds(IEnumerable<long> tags)

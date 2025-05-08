@@ -1,4 +1,4 @@
-using Components.Statistics.Services.Interfases;
+using Components.Statistics.Services.Interfaces;
 using DataBase.Statistics.DTOs;
 using DataBase.Statistics.Repositories.Interfaces;
 using Domain.Statistics.Entities;

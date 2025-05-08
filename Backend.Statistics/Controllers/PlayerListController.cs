@@ -1,4 +1,4 @@
-﻿using Components.Statistics.Services.Interfases;
+﻿using Components.Statistics.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Statistics.Controllers;

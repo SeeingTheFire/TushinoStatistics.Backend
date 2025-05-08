@@ -1,5 +1,5 @@
 using Components.Statistics.Services.DomainServices;
-using Components.Statistics.Services.Interfases;
+using Components.Statistics.Services.Interfaces;
 using DataBase.Statistics.Repositories;
 using DataBase.Statistics.Repositories.Interfaces;
 using Parser.Statistics.Services;

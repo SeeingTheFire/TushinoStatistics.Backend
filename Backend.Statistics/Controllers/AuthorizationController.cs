@@ -38,7 +38,6 @@ public class AuthenticateController(
         }
 
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
-
         var token = new JwtSecurityToken(
             issuer: configuration["JWT:ValidIssuer"],
             audience: configuration["JWT:ValidAudience"],
@@ -63,7 +62,7 @@ public class AuthenticateController(
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new Response { Status = "Error", Message = "User already exists!" });
 
-        var user = new ApplicationUser()
+        var user = new ApplicationUser
         {
             Email = model.Email,
             SecurityStamp = Guid.NewGuid().ToString(),

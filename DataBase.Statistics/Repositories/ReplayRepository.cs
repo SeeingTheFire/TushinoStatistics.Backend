@@ -14,6 +14,17 @@ public class ReplayRepository(ApplicationContext context) : IReplayRepository
             .ToListAsync();
     }
 
+    public async Task<Dictionary<string, bool>> CheckIsNewReplays(List<string> newReplays)
+    {
+         var replaysList = await context.Replays
+            .Where(x => newReplays.Contains(x.GameId))
+            .Select(r => r.GameId)
+            .AsNoTracking()
+            .ToListAsync();
+
+         return newReplays.ToDictionary(replay => replay, replay => !replaysList.Contains(replay));
+    }
+
     public void Add(Game gameGame)
     {
         context.Replays.Add(gameGame);

@@ -75,7 +75,7 @@ public static partial class JsonReplayParserExtensions
             return true;
         }
 
-        // Добавляем информацию о играках
+        // Добавляем информацию о игроках
         foreach (var row in players.EnumerateArray())
         {
             switch (row[0].GetInt32())
@@ -198,16 +198,14 @@ public static partial class JsonReplayParserExtensions
         return null;
     }
 
-
-
     /// <summary>
     /// Получение информации по килам с игры в 1 тайминг
     /// </summary>
-    /// <param name="gameId">Идентификатор игры</param>
+    /// <param name="game">Игры</param>
     /// <param name="replayEvent">События реплее</param>
     /// <param name="oneTime">Один тайминг</param>
     /// <param name="replayInfo">Объект текущего реплея</param>
-    private static void GetKillsInfo(this ReplayInfo replayInfo, JsonElement replayEvent, Game game, IReadOnlyList<object> oneTime)
+    private static void GetKillsInfo(this ReplayInfo replayInfo, JsonElement replayEvent, Game game, List<object> oneTime)
     {
         Vehicle? vehicle = null;
          if (!replayInfo.Players.TryGetValue(replayEvent[3].GetInt32(), out var killed) && 
@@ -256,11 +254,11 @@ public static partial class JsonReplayParserExtensions
     /// <summary>
     /// Получение информации по урону с игры в 1 тайминг
     /// </summary>
-    /// <param name="gameId">Идентификатор игры</param>
+    /// <param name="game">Идентификатор игры</param>
     /// <param name="replayEvent">События реплее</param>
     /// <param name="oneTime">Один тайминг</param>
     /// <param name="replayInfo">Объект текущего реплея</param>
-    private static void GetDamageInfo(this ReplayInfo replayInfo, JsonElement replayEvent, Game game,  IReadOnlyList<object> oneTime)
+    private static void GetDamageInfo(this ReplayInfo replayInfo, JsonElement replayEvent, Game game,  List<object> oneTime)
     {
         if (!replayInfo.Players.TryGetValue(replayEvent[2].GetInt32(), out var murder))
         {
@@ -326,11 +324,11 @@ public static partial class JsonReplayParserExtensions
     /// <summary>
     /// Получение информации по лечению с игры в 1 тайминг
     /// </summary>
-    /// <param name="gameId">Идентификатор игры</param>
+    /// <param name="game">Идентификатор игры</param>
     /// <param name="replayEvent">События реплее</param>
     /// <param name="oneTime">Один тайминг</param>
     /// <param name="replayInfo">Объект текущего реплея</param>
-    private static void GetMedicalInfo(this ReplayInfo replayInfo, JsonElement replayEvent, Game game, IReadOnlyList<object> oneTime)
+    private static void GetMedicalInfo(this ReplayInfo replayInfo, JsonElement replayEvent, Game game, List<object> oneTime)
     {
             
         // Находим лечащего игрока

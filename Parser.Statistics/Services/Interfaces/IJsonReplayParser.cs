@@ -9,6 +9,5 @@ namespace Parser.Statistics.Services.Interfaces;
 public interface IJsonReplayParser
 {
     // Получение информации для добавления базы данных
-    public Task<ReplayInfo?> GetInformationFromJson(List<List<object>> replayRepl, Game gameTdo,
-        CancellationToken cancellationToken);
+    public Task<ReplayInfo?> GetInformationFromJson(List<List<object>> replayRepl, Game gameTdo, CancellationToken cancellationToken);
 }
